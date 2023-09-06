@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primaryColor"
+    android:orientation="vertical"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:orientation="vertical">
+    android:paddingRight="16dp">
 
     <TextView
         android:id="@+id/textViewSpeed"
@@ -13,7 +14,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="200dp"
         android:text="Speed"
-        android:textColor="#FFA500"
+        android:textColor="#FFFFFF"
         android:textSize="25sp" />
 
     <TextView
@@ -22,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text = "Acceleration"
-        android:textColor="#FFA500"
+        android:text="Acceleration"
+        android:textColor="#FFFFFF"
         android:textSize="25sp" />
 
 
@@ -34,7 +35,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:text="Slope"
-        android:textColor="#FFA500"
+        android:textColor="#FFFFFF"
         android:textSize="24sp" />
 
     <Button
@@ -42,9 +43,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/secondaryColor"
         android:layout_marginTop="20dp"
-        android:text="Start"
-        android:onClick="startChronometer"/>
+        android:onClick="startChronometer"
+        android:text="Start" />
 
     <Button
         android:id="@+id/pauseButton"
@@ -52,16 +54,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="Pause"
-        android:onClick="pauseChronometer"/>
+        android:backgroundTint="@color/secondaryColor"
+        android:onClick="pauseChronometer"
+        android:text="Pause" />
 
     <Button
         android:id="@+id/resetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/secondaryColor"
         android:layout_marginTop="20dp"
-        android:text="Reset"
-        android:onClick="resetChronometer"/>
+        android:onClick="resetChronometer"
+        android:text="Reset" />
 
-    </LinearLayout>
+</LinearLayout>

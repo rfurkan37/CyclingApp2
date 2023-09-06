@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CyclingApp2</string>
+    <string name="title_activity_home_page">HomaPage</string>
 </resources>
