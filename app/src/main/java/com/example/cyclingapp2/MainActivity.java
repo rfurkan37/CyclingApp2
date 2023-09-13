@@ -37,9 +37,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements SensorEventListener, LocationListener {
     private Chronometer chronometer;
     private TextView speedTextView;
+    private  TextView averageTextView;
     private long pauseOffset;
     private boolean running;
     private long velocity = 0;
+
+    double averageSpeed = 0;
+    long changes = 1;
 
     LocationManager locationManager;
 
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_main);
         chronometer = (Chronometer) findViewById(R.id.chronometer);
         speedTextView = findViewById(R.id.textViewSpeed);
+        averageTextView = findViewById(R.id.textViewSlope);
 
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -96,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged (SensorEvent event) {
         TextView accelerationview = (TextView)findViewById(R.id.textViewAcceleration);
 
-        if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+        if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER && running){
             accelerationview.setText(String.format("%.2f", event.values[0]));
             
         }
@@ -107,10 +112,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        float speed = location.getSpeed();
+        changes = changes + 1;
+        double speed = location.getSpeed();
 
 
-        speedTextView.setText(String.format("%.2f km/h", speed));
+        if(running){
+        averageSpeed = averageSpeed + (speed - averageSpeed)/changes;
+
+
+        System.out.println(changes);
+        averageTextView.setText(String.format("%.2f km/h", averageSpeed));
+
+
+        speedTextView.setText(String.format("%.2f km/h", speed));}
     }
 
     @Override
