@@ -25,6 +25,7 @@ import android.os.TestLooperManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,9 +39,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Chronometer chronometer;
     private TextView speedTextView;
     private  TextView averageTextView;
+    private  TextView maxSpeedTextView;
+    private  TextView distanceTextView;
+
     private long pauseOffset;
     private boolean running;
-    private long velocity = 0;
+    private double velocity = 0;
+
+    private double maxSpeed = 0;
 
     double averageSpeed = 0;
     long changes = 1;
@@ -53,8 +59,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometer.stop();
+        running = false;
+        pauseOffset = 0;
+        chronometer.setBase(SystemClock.elapsedRealtime());
         speedTextView = findViewById(R.id.textViewSpeed);
         averageTextView = findViewById(R.id.textViewSlope);
+        maxSpeedTextView = findViewById(R.id.textViewMaxSpeed);
+        distanceTextView = findViewById(R.id.textViewDistance);
 
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -74,6 +86,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0 , 0, this);
+        ImageButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+
     }
     public void startChronometer(View v) {
         if(!running){
@@ -90,42 +111,55 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
     public void resetChronometer(View v) {
-        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.stop();
+        running = false;
         pauseOffset = 0;
+        ConfirmationDialogFragment dialog = new ConfirmationDialogFragment();
+
+        // Set the data using the setter methods
+        dialog.setSpeedValue(velocity);
+        dialog.setMaxSpeedValue(maxSpeed);
+        dialog.setAverageSpeedValue(averageSpeed);
+        long time = ((SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000);
+        double timeRes = time/60.0;
+        dialog.setTimeValue(timeRes);
+        dialog.setDistanceValue(time*(averageSpeed/3600));
+        dialog.show(getSupportFragmentManager(), "ConfirmationDialogFragment");
+        chronometer.setBase(SystemClock.elapsedRealtime());
     }
-
-
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onSensorChanged (SensorEvent event) {
         TextView accelerationview = (TextView)findViewById(R.id.textViewAcceleration);
-
         if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER && running){
-            accelerationview.setText(String.format("%.2f", event.values[0]));
+            accelerationview.setText("Acceleration: " + String.format("%.2f", event.values[0]));
             
         }
     }
     @Override
     public void onAccuracyChanged(Sensor sensor,int accuracy){
     }
-
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     public void onLocationChanged(@NonNull Location location) {
         changes = changes + 1;
         double speed = location.getSpeed();
-
+        this.velocity = speed;
 
         if(running){
         averageSpeed = averageSpeed + (speed - averageSpeed)/changes;
 
-
         System.out.println(changes);
-        averageTextView.setText(String.format("%.2f km/h", averageSpeed));
+        averageTextView.setText("Av.Speed: " + String.format("%.2f km/h", averageSpeed));
 
-
-        speedTextView.setText(String.format("%.2f km/h", speed));}
-    }
+        if(speed>this.maxSpeed)
+            maxSpeed = speed;
+        long time = ((SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000);// Replace with your actual value
+        speedTextView.setText("Current Speed: " + String.format("%.2f km/h", speed));
+        maxSpeedTextView.setText("Speed Record: " + String.format("%.2f km/h", maxSpeed));
+        distanceTextView.setText("Distance Travelled: " + String.format("%.2f", time*(averageSpeed/3600)) + "km");
+}}
 
     @Override
     public void onLocationChanged(@NonNull List<Location> locations) {

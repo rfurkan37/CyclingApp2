@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CyclingApp2</string>
-    <string name="title_activity_home_page">HomaPage</string>
+    <string name="title_activity_save_record">SaveRecord</string>
+    <string name="title_activity_main2">MainActivity2</string>
 </resources>

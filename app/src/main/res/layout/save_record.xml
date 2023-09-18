@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryColor"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="0dp">
+
+    <!-- Text View for displaying speed -->
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/secondaryColor"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+
+        <!-- Back Button -->
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            app:tint="#FFFFFF" />
+
+        <!-- Centered Text -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Save Record"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Text View for displaying average speed -->
+
+    <!-- Text View for displaying time -->
+    <TextView
+        android:id="@+id/maxSpeedText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Max speed is: "
+        android:paddingBottom="16dp"
+        android:textColor="#FFFFFF"
+        android:paddingTop="15dp"
+        android:gravity="center"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your time is: "
+        android:paddingBottom="16dp"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:textSize="18sp" />
+
+    <!-- Take Picture Button -->
+
+    <!-- ImageView for displaying the taken image -->
+
+    <TextView
+        android:id="@+id/distanceText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:text="Your distance is: "
+        android:paddingBottom="16dp"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/averageSpeedText"
+        android:layout_width="match_parent"
+        android:textColor="#FFFFFF"
+        android:layout_height="wrap_content"
+        android:text="Your average speed is: "
+        android:gravity="center"
+        android:textSize="18sp"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imageContainer"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#FFFFFF">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_launcher_foreground" />
+    </androidx.cardview.widget.CardView>
+
+
+    <Button
+        android:id="@+id/takePictureButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:baselineAligned="false"
+        android:backgroundTint="@color/secondaryColor"
+        android:textColor="#FFFFFF"
+        android:text="Take Picture" />
+
+    <EditText
+        android:id="@+id/noteField"
+        android:layout_width="match_parent"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_height="200dp"
+        android:background="#FFFFFF"
+        android:textColor="#000000"
+        android:gravity="top|start"
+        android:hint="Write here a note to remember. Living means remember. If you forget, you die."
+        android:paddingStart="8dp"
+        android:textColorHint="#a799a8"
+        android:paddingTop="8dp"
+        android:layout_marginTop="30dp"/>
+
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/secondaryColor"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp"
+        android:text="Save" />
+
+
+
+</LinearLayout>
