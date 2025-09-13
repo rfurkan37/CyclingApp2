@@ -13,3 +13,67 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Android Studio
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.ipr
+*.iml
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Android
+/app/build/
+/build/
+/captures/
+/.externalNativeBuild/
+/.cxx/
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services
+google-services.json
+
+# Fabric
+fabric.properties
+
+# ProGuard
+proguard/
+*.pro
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Version control
+.vscode/
+.history/
