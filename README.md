@@ -93,7 +93,7 @@ CyclingApp2/
 
 This project was developed by:
 - **Recep Furkan Akın** (rfurkan37)
-- **Emre** (Contributor)
+- **Emre Yılmaz** (emre9180)
 
 ## 📄 License
 
